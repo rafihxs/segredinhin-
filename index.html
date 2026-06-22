@@ -1,76 +1,350 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um Lugar Para Respirar</title>
 
-<title>Para Você ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+/* ===== RESET ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+body{
+font-family:Poppins, sans-serif;
+background:#050814;
+overflow:hidden;
+color:white;
+}
 
-<link rel="stylesheet" href="style.css">
+/* ===== FUNDO ESTRELADO ===== */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size: 80px 80px;
+background-position:0 0, 40px 40px;
+opacity:.15;
+animation:moveStars 120s linear infinite;
+z-index:-3;
+}
 
+@keyframes moveStars{
+from{transform:translateY(0);}
+to{transform:translateY(-1000px);}
+}
+
+/* ===== AURORA ===== */
+.aurora{
+position:fixed;
+width:150%;
+height:150%;
+top:-25%;
+left:-25%;
+background:radial-gradient(circle,#6a7cff55,transparent 40%),
+radial-gradient(circle,#ff6ad555,transparent 40%),
+radial-gradient(circle,#6affd555,transparent 40%);
+filter:blur(90px);
+animation:auroraMove 20s ease-in-out infinite alternate;
+z-index:-2;
+}
+
+@keyframes auroraMove{
+0%{transform:rotate(0deg) scale(1);}
+100%{transform:rotate(15deg) scale(1.2);}
+}
+
+/* ===== ESCURECIMENTO ===== */
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.7));
+z-index:-1;
+}
+
+/* ===== INTRO ===== */
+.intro{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+}
+
+.card{
+max-width:700px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:25px;
+padding:40px;
+animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+font-family:"Playfair Display", serif;
+font-size:2.4rem;
+margin-bottom:20px;
+}
+
+p{
+line-height:1.8;
+opacity:.9;
+}
+
+button{
+margin-top:25px;
+padding:14px 35px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+background:linear-gradient(135deg,#7a7cff,#5de2d5);
+color:white;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* ===== TELA PRINCIPAL ===== */
+.hidden{display:none;}
+
+.main{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="particles"></div>
-
+<div class="stars"></div>
 <div class="aurora"></div>
-
 <div class="overlay"></div>
 
-<section class="home">
+<!-- INTRO -->
+<section class="intro" id="intro">
+<div class="card">
+<h1>Um lugar para respirar...</h1>
 
-<div class="glass">
+<p>
+Se você chegou até aqui...<br><br>
 
-<h1>Para a pessoa que merece um pouco de paz...</h1>
+talvez o seu dia tenha sido pesado.<br>
+talvez sua mente esteja cansada.<br>
+ou talvez você só precise de um pequeno descanso.<br><br>
 
-<p id="typing"></p>
-
-<button id="start">
-Começar ✨
-</button>
-
-</div>
-
-</section>
-
-<section id="main" class="hidden">
-
-<h2>Bem-vinda.</h2>
-
-<p class="texto">
-
-Se você chegou até aqui...
-
-é porque alguém quis construir um pequeno lugar onde você pudesse respirar por alguns minutos.
-
-Não importa como foi seu dia.
-
-Não importa quantas coisas deram errado.
-
-Aqui existe apenas calma.
-
-E algumas palavras que talvez você precisasse ouvir.
-
+Então por alguns minutos... deixa o mundo lá fora.<br>
+Aqui só existe calma.
 </p>
 
-<button id="continuar">
-Continuar
-</button>
-
+<button onclick="start()">Começar ✨</button>
+</div>
 </section>
 
-<script src="script.js"></script>
+<!-- MAIN -->
+<section class="main hidden" id="main">
+<h1>Iniciando jornada...</h1>
+</section>
+
+<script>
+
+function start(){
+document.getElementById("intro").classList.add("hidden");
+document.getElementById("main").classList.remove("hidden");
+}
+
+<script>
+
+let step = 0;
+
+/* ===== INICIAR ===== */
+function start(){
+document.getElementById("intro").classList.add("hidden");
+document.getElementById("main").classList.remove("hidden");
+
+setTimeout(() => {
+showChapter();
+}, 800);
+}
+
+/* ===== CONTEÚDO ===== */
+const chapters = [
+`Respira... só isso por agora.
+
+Não precisa pensar em tudo ao mesmo tempo.
+
+Esse lugar foi feito pra te dar alguns segundos de paz.`,
+
+`Talvez você esteja cansada.
+
+Talvez tenha tentado ser forte o dia inteiro.
+
+Mas aqui você não precisa ser nada além de você.`,
+
+`Se ninguém te disse hoje...
+
+você está indo bem.
+
+Mesmo com tudo.`
+];
+
+/* ===== MÁQUINA DE ESCREVER ===== */
+function typeText(text, element, speed=35){
+element.innerHTML = "";
+let i = 0;
+
+function typing(){
+if(i < text.length){
+element.innerHTML += text.charAt(i);
+i++;
+setTimeout(typing, speed);
+}
+}
+
+typing();
+}
+
+/* ===== MOSTRAR CAPÍTULO ===== */
+function showChapter(){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<div style="
+max-width:750px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.1);
+padding:40px;
+border-radius:25px;
+text-align:center;
+">
+
+<h2 style="
+font-family:Playfair Display;
+font-size:2rem;
+margin-bottom:20px;
+">Capítulo ${step+1}</h2>
+
+<p id="text" style="line-height:1.9; font-size:1.1rem;"></p>
+
+<button onclick="next()">Continuar</button>
+
+</div>
+`;
+
+typeText(chapters[step], document.getElementById("text"));
+}
+
+/* ===== PRÓXIMO ===== */
+function next(){
+
+step++;
+
+if(step < chapters.length){
+showChapter();
+} else {
+secretMessage();
+}
+}
+
+/* ===== MENSAGEM ESCONDIDA ===== */
+function secretMessage(){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<div style="
+max-width:750px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.1);
+padding:40px;
+border-radius:25px;
+text-align:center;
+animation:fadeIn 2s ease;
+">
+
+<h2 style="font-family:Playfair Display;">Tem algo que você precisa saber...</h2>
+
+<p style="line-height:1.9; margin-top:15px;">
+Você não precisa ser perfeita.<br><br>
+
+Você não precisa dar conta de tudo sozinha.<br><br>
+
+E mesmo quando você acha que está "quebrada"...<br>
+você ainda continua sendo alguém incrível.<br><br>
+
+Se ninguém te lembrou hoje:<br>
+eu te admiro por continuar.
+</p>
+
+<button onclick="finalMessage()">Continuar</button>
+
+</div>
+`;
+}
+
+/* ===== FINAL ===== */
+function finalMessage(){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<div style="
+max-width:750px;
+background:rgba(255,255,255,.07);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+padding:45px;
+border-radius:25px;
+text-align:center;
+animation:fadeIn 2s ease;
+">
+
+<h1 style="font-family:Playfair Display;">Pra você 💙</h1>
+
+<p style="line-height:2; margin-top:20px;">
+Se você chegou até aqui...<br><br>
+
+eu só queria que você lembrasse de uma coisa:<br><br>
+
+você é importante demais pra esse mundo.<br><br>
+
+E mesmo quando tudo parece pesado...<br>
+você ainda continua sendo luz.
+</p>
+
+</div>
+`;
+
+}
+
+</script>
 
 </body>
-
-</html>
+</html> 
