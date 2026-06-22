@@ -144,6 +144,27 @@ padding:30px;
 <div class="stars"></div>
 <div class="aurora"></div>
 <div class="overlay"></div>
+<!-- ===== MENSAGENS ESCONDIDAS NO CENÁRIO ===== -->
+
+<div class="secret" style="top:15%; left:10%;" onclick="reveal(this)">
+✦
+</div>
+
+<div class="secret" style="top:70%; left:20%;" onclick="reveal(this)">
+✦
+</div>
+
+<div class="secret" style="top:40%; left:85%;" onclick="reveal(this)">
+✦
+</div>
+
+<div class="secret" style="top:80%; left:70%;" onclick="reveal(this)">
+✦
+</div>
+
+<div class="secret" style="top:25%; left:55%;" onclick="reveal(this)">
+✦
+</div>
 
 <!-- INTRO -->
 <section class="intro" id="intro">
@@ -340,11 +361,54 @@ você ainda continua sendo luz.
 </p>
 
 </div>
-`;
+`;<button onclick="endExperience()">Encerrar ✨</button>
 
 }
 
 </script>
 
+/* ===== REVELAR MENSAGENS ESCONDIDAS ===== */
+function reveal(el){
+
+const messages = [
+"Mesmo quando você não percebe... você está indo bem.",
+"Você não precisa ser forte o tempo todo.",
+"Existe beleza até nos dias difíceis.",
+"Você é mais importante do que imagina.",
+"Eu espero que você se cuide como merece."
+];
+
+let msg = messages[Math.floor(Math.random()*messages.length)];
+
+el.innerHTML = msg;
+
+el.style.opacity = 1;
+
+el.style.background = "rgba(255,255,255,.08)";
+el.style.padding = "10px 15px";
+el.style.borderRadius = "15px";
+el.style.maxWidth = "220px";
+el.style.fontSize = "12px";
+}
+
+/* ===== MELHORAR ESTRELAS (CLIMA VIVO) ===== */
+document.addEventListener("mousemove", (e)=>{
+
+const star = document.createElement("div");
+
+star.style.position = "absolute";
+star.style.width = "2px";
+star.style.height = "2px";
+star.style.background = "white";
+star.style.borderRadius = "50%";
+star.style.left = e.clientX + "px";
+star.style.top = e.clientY + "px";
+star.style.opacity = "0.4";
+
+document.body.appendChild(star);
+
+setTimeout(()=> star.remove(), 1200);
+
+});
 </body>
 </html> 
