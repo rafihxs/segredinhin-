@@ -204,12 +204,24 @@ let step = 0;
 
 /* ===== INICIAR ===== */
 function start(){
-document.getElementById("intro").classList.add("hidden");
-document.getElementById("main").classList.remove("hidden");
+
+const intro = document.getElementById("intro");
+const main = document.getElementById("main");
+
+if(!intro || !main){
+console.error("Elementos intro ou main não encontrados");
+return;
+}
+
+intro.classList.add("hidden");
+main.classList.remove("hidden");
 
 setTimeout(() => {
+if(typeof showChapter === "function"){
 showChapter();
-}, 800);
+}
+}, 600);
+
 }
 
 /* ===== CONTEÚDO ===== */
